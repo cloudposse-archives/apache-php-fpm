@@ -30,10 +30,7 @@ RUN apt-get update && \
       rm -f /var/www/html/index.html && \
       echo '<?php // silence is golden ?>' > /var/www/html/index.php
 
-ADD conf-available/ /etc/apache2/conf-available/
-ADD mods-available/ /etc/apache2/mods-available/
-ADD fpm/ /etc/php5/fpm/
-ADD start /start
+ADD rootfs /
 
 RUN a2dismod mpm_prefork && \
     a2dismod mpm_worker && \

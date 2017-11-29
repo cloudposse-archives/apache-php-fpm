@@ -18,6 +18,6 @@ m4  -DPHP_FPM_PM="{{$PHP_FPM_PM}}" \
     -DPHP_FPM_MAX_REQUESTS="{{$PHP_FPM_MAX_REQUESTS}}" /etc/php5/fpm/pool.d/www.conf.m4 > /etc/php5/fpm/pool.d/www.conf
 
 
-service php5-fpm start
+service php7.0-fpm start
 
 exec /usr/sbin/apache2 -D FOREGROUND $@

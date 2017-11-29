@@ -1,4 +1,4 @@
-FROM cloudposse/apache-php
+FROM cloudposse/apache-php:latest
 
 MAINTAINER Erik Osterman "e@osterman.com"
 
@@ -23,25 +23,21 @@ RUN apt-get update && \
     apt-add-repository multiverse && \
     apt-get update && \
     apt-get -y install \
-      apache2-mpm-event \
       libapache2-mod-fastcgi \
-      php5-fpm && \
+      php-fpm && \
       apt-get clean && \
       rm -f /var/www/html/index.html && \
       echo '<?php // silence is golden ?>' > /var/www/html/index.php
 
-ADD conf-available/ /etc/apache2/conf-available/
-ADD mods-available/ /etc/apache2/mods-available/
-ADD fpm/ /etc/php5/fpm/
-ADD start /start
+ADD rootfs /
 
 RUN a2dismod mpm_prefork && \
     a2dismod mpm_worker && \
-    a2dismod php5 && \
+    a2dismod php7.0 && \
     a2enmod mpm_event && \
     a2enmod actions && \
     a2enmod fastcgi && \
     a2enmod alias && \
-    a2enconf php5-fpm 
+    a2enconf php7.0-fpm
 
 
